@@ -6,6 +6,10 @@ export CFLAGS+=-I$(SIMPLE_CYPHER_INCLUDE) -L$(SIMPLE_CYPHER_LIB)
 all: bin/test
 	gdb bin/test
 
+.PHONY: test-bin
+test-bin: scripts/test-simple-cypher.bash scripts/test.bash
+	env PATH="$(PATH):$(SIMPLE_CYPHER_BIN)" ./scripts/test-simple-cypher.bash
+
 .PHONY: clean
 clean: 
 	rm -f src/test-simple-cypher-encrypt-decrypt.o

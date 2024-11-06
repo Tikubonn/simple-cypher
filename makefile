@@ -13,8 +13,12 @@ clean:
 	make -C test clean
 
 .PHONY: test
-test: all 
+test: all
 	make -C test SIMPLE_CYPHER_INCLUDE=$(CURDIR)/dist/include SIMPLE_CYPHER_LIB=$(CURDIR)/dist/lib
+
+.PHONY: test-bin
+test-bin: all
+	make -C test test-bin SIMPLE_CYPHER_BIN=$(CURDIR)/bin
 
 src/simple-cypher.o: src/simple-cypher.c src/simple-cypher.h
 	$(GCC) $(CFLAGS) -c -o src/simple-cypher.o src/simple-cypher.c

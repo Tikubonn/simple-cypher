@@ -174,9 +174,6 @@ static inline int parse_args (int argc, char **argv, FILE **inputp, FILE **outpu
         output = fopen(outputfile, "wb");
         if (output == NULL){
           fprintf(stderr, "Could not open file \"%s\" (errno = %d).\n", outputfile, errno);
-          if (fclose(input) == EOF){
-            fprintf(stderr, "Could not close file \"%s\" (errno = %d).\n", inputfile, errno);
-          }
           return 1;
         }
       }
@@ -222,24 +219,12 @@ int main (int argc, char **argv){
     return 1;
   }
   if (showhelp){
-    size_t writtensize = fwrite(HELP_MESSAGE, 1, sizeof(HELP_MESSAGE), stdout);
-    if (writtensize < sizeof(HELP_MESSAGE)){
-      if (ferror(stdout)){
-        fprintf(stderr, "Caused some error at writing into a file.\n");
-        return 1;
-      }
-    }
+    printf("%s", HELP_MESSAGE);
     return 0;
   }
   else 
   if (showversion){
-    size_t writtensize = fwrite(VERSION_MESSAGE, 1, sizeof(VERSION_MESSAGE), stdout);
-    if (writtensize < sizeof(VERSION_MESSAGE)){
-      if (ferror(stdout)){
-        fprintf(stderr, "Caused some error at writing into a file.\n");
-        return 1;
-      }
-    }
+    printf("%s", VERSION_MESSAGE);
     return 0;
   }
   else {

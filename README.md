@@ -73,7 +73,7 @@ make
 非常に簡素なテストも同梱されています。
 
 ```bash
-make test
+make test test-bin
 ```
 
 ## License 
